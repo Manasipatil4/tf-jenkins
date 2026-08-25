@@ -1,10 +1,6 @@
-provider "aws" {
-  region = "eu-north-1"
-}
-
 resource "null_resource" "sync_website" {
 
   provisioner "local-exec" {
-    command = "aws s3 sync /root/ s3://manasi-patil-b73/"
+    command = "aws s3 sync . s3://manasi-patil-b73/ --exclude '*' --include 'index.html'"
   }
 }
