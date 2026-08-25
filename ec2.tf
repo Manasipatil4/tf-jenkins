@@ -1,18 +1,12 @@
-resource "null_resource" "sync_website" {
+provider "aws" {
+    region = "eu-north-1"
+}
+resource "aws_instance" "ec2" {
+    ami = "ami-0aba19e56f3eaec05"
+    instance_type = "t3.micro"
+    key_name = "manasi"
+    tags = {
+      Name = "my-ec2"
 
-  provisioner "local-exec" {
-    command = <<-EOT
-      echo "Terraform working directory:"
-      pwd
-
-      echo "Files in Jenkins workspace:"
-      ls -la
-
-      echo "Syncing index.html to S3:"
-      aws s3 sync . s3://manasi-patil-b73/ --exclude "*" --include "index.html"
-
-      echo "S3 bucket contents:"
-      aws s3 ls s3://manasi-patil-b73/
-    EOT
-  }
+    }
 }
