@@ -4,5 +4,5 @@ provider "aws" {
 resource "aws_s3_object" "index" {
   bucket = "manasi-patil-b73"
   key    = "index.html"
-  source = "/root/index.html"
+  source = "${path.root}/index.html"
 }
